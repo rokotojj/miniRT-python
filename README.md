@@ -1,6 +1,6 @@
 # miniRT — трассировщик лучей
 
-[![CI](https://github.com/__GITHUB_USER__/minirt-python/actions/workflows/ci.yml/badge.svg)](https://github.com/__GITHUB_USER__/minirt-python/actions/workflows/ci.yml)
+[![CI](https://github.com/rokotojj/miniRT-python/actions/workflows/ci.yml/badge.svg)](https://github.com/rokotojj/miniRT-python/actions/workflows/ci.yml)
 
 ![скриншот](docs/screenshot.png)
 
