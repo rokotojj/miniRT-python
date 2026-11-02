@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Окружения
+.venv/
+venv/
+env/
+
+# Кэши инструментов
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE и ОС
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Промежуточные изображения: в репозитории хранятся только снимки из docs/
+*.png
+!docs/*.png
+out/
+*.prof

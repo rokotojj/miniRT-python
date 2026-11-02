@@ -1,0 +1,32 @@
+[project]
+name = "minirt"
+version = "1.0.0"
+description = "miniRT — трассировщик лучей на Python + NumPy"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "pygame>=2.5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "mypy>=1.10", "ruff>=0.5"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+
+[tool.mypy]
+strict = true
+warn_unreachable = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "N", "SIM", "C4", "PT", "NPY", "RUF"]
+# RUF001–RUF003 считают кириллицу «похожими на латиницу» символами — сообщения и комментарии на русском
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+# скрипты tools/ добавляют корень проекта в sys.path до импорта minirt
+"tools/*" = ["E402"]
