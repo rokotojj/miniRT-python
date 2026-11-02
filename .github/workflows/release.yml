@@ -1,0 +1,35 @@
+name: Release exe
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows-exe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Зависимости
+        run: pip install -r requirements.txt pyinstaller
+      - name: Сборка minirt.exe
+        run: pyinstaller --onefile --name minirt main.py
+      - name: Проверка exe на three.rt
+        run: .\dist\minirt.exe scenes\three.rt --no-window --out three.png --workers 2
+      - name: Архив minirt-windows.zip
+        run: |
+          New-Item -ItemType Directory minirt-windows | Out-Null
+          Copy-Item dist\minirt.exe, README.md minirt-windows\
+          Copy-Item -Recurse scenes minirt-windows\scenes
+          Compress-Archive -Path minirt-windows\* -DestinationPath minirt-windows.zip
+      - name: Загрузка в релиз
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload ${{ github.event.release.tag_name }} dist\minirt.exe minirt-windows.zip --clobber
